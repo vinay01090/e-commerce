@@ -146,20 +146,39 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     color: Colors.black12,
                   ),
                 ),
-                child: Column(
+               child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                   ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: widget.order.products.length,
-                    itemBuilder: (context,index){
-                      return Column(
+                    for (int i = 0; i < widget.order.products.length; i++)
+                      Row(
                         children: [
-                          Image.network(widget.order.products[index].images[0]),
-                      ],
-                      ); 
-                            
-                    },
-                    ),
+                          Image.network(
+                            widget.order.products[i].images[0],
+                            height: height/10,
+                            width: 120,
+                          ),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.order.products[i].name,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  'Qty: ${widget.order.quantity[i]}',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),
